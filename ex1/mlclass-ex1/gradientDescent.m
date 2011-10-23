@@ -18,9 +18,11 @@ for iter = 1:num_iters
     %
 
 
-
-
-
+  for i = 1:m,
+    h(i,:) = theta' * X(i,:)';
+  end;
+  d = h - y;
+  theta = theta - alpha/m * (d' * X)';
 
 
     % ============================================================
