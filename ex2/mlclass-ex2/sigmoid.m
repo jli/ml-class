@@ -10,7 +10,12 @@ g = zeros(size(z));
 %               vector or scalar).
 
 
-
+[r c] = size(z);
+for i = 1:r,
+  for j = 1:c,
+    g(i,j) = 1/(1+exp(-z(i,j)));
+  end
+end
 
 
 % =============================================================
