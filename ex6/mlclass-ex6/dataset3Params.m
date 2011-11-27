@@ -23,9 +23,28 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+vals = [0.01 0.03 0.1 0.3 1 3 10 30];
+best = 10000;
 
+letthisrun = 0
 
-
+if (letthisrun)
+  for c=vals,
+    for s=vals,
+      model = svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, s));
+      err = mean(double(svmPredict(model, Xval) ~= yval))
+      if (err < best)
+        C = c
+        sigma = s
+        best = err;
+      endif
+    end
+  end
+else
+  % hmm, timing out when I actually let this run...
+  C = 1
+  sigma = 0.1
+endif
 
 
 
